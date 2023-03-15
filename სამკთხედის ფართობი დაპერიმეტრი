@@ -1,0 +1,98 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+struct samkutxedi{
+	double agv;
+	double bgv;
+	double cgv;
+	double Aku;
+	double Bku;
+	double Cku;
+	
+};
+samkutxedi shemotana();
+
+samkutxedi srulyofa(samkutxedi tmp);
+
+double pr(double a,double b,double c);
+
+void gamotana();
+
+double fatobi(double a,double b, double c);
+
+int main(int argc, char** argv) {
+	samkutxedi samkutxa;
+	samkutxa=shemotana();
+	srulyofa(samkutxa);
+	cout<<"perimetri="<<pr(samkutxa.agv,samkutxa.bgv,samkutxa.cgv)<<endl;
+	cout<<"farrobi="<<fatobi(samkutxa.agv,samkutxa.bgv,samkutxa.cgv)<<endl;
+	return 0;
+}
+
+samkutxedi srulyofa(samkutxedi tmp){
+	
+	
+	double k=tmp.Aku*tmp.Bku+tmp.Aku*tmp.Cku+tmp.Cku+tmp.Bku;
+		if(k==0){	
+	if(tmp.agv==0){
+		tmp.agv=sqrt(tmp.bgv*tmp.bgv+tmp.cgv*tmp.cgv-2*cos(tmp.Aku));
+		
+	}else{
+     	 if(tmp.cgv==0){
+	    	tmp.bgv=sqrt(tmp.agv*tmp.agv+tmp.bgv*tmp.bgv-2*cos(tmp.Cku));
+	    	
+ 	    }else{
+ 	    	tmp.bgv=sqrt(tmp.agv*tmp.agv+tmp.cgv*tmp.cgv-2*cos(tmp.Bku));
+		}
+	}
+	if(tmp.bgv==0){
+		tmp.bgv=sqrt(tmp.agv*tmp.agv+tmp.cgv*tmp.cgv-2*cos(tmp.Bku));
+	}
+	}else{
+		if(tmp.Aku==0){
+			tmp.Aku=180-tmp.Bku-tmp.Cku;
+			tmp.cgv=tmp.agv*sin(tmp.Cku)/sin(tmp.Aku);
+			tmp.bgv=tmp.agv*sin(tmp.Bku)/sin(tmp.Aku);
+		}else{
+			if(tmp.Bku==0){
+				tmp.Bku=180-tmp.Aku-tmp.Cku;
+				tmp.cgv=tmp.bgv*sin(tmp.Cku)/sin(tmp.Bku);
+				tmp.agv=tmp.bgv*sin(tmp.Aku)/sin(tmp.Bku);
+			}else{
+				tmp.Cku=180-tmp.Bku-tmp.Aku;
+				tmp.cgv=tmp.agv*sin(tmp.Cku)/sin(tmp.Aku);
+			}
+		}
+	}
+	return tmp;
+}
+
+samkutxedi shemotana(){
+	samkutxedi tmp;
+	bool pi=0;
+	do{
+		cout<<"tu romelime elementis mnishvneloba ar icit daweet 0"<<endl;
+	pi=0;
+	cout<<"a=";cin>>tmp.agv;
+	cout<<"b=";cin>>tmp.bgv;
+	cout<<"c=";cin>>tmp.cgv;
+	cout<<"A=";cin>>tmp.Aku;
+	cout<<"B=";cin>>tmp.Bku;
+	cout<<"C=";cin>>tmp.Cku;
+	if((tmp.agv>=0)&&(tmp.bgv>=0)&&(tmp.cgv>=0)&&(tmp.Aku>=0)&&(tmp.Bku>=0)&&(tmp.Cku>=0)){
+		pi=1;
+	}else{
+	cout<<"debilo uaryofiti gradusi an gverdis sigrdze shengan gavige dawere swored!!!"<<endl;
+	}
+  }while(pi==0);
+  return tmp;
+}
+
+double pr(double a,double b,double c){
+return a+b+c;
+}
+double fatobi(double a,double b, double c){
+	double p=pr(a,b,c)/2;
+	return sqrt(p*(p-a)*(p-b)*(p-c));
+}
